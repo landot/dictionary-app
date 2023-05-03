@@ -48,6 +48,9 @@ function App() {
       <button onClick={toggleTheme}>Toggle Theme</button>
       <button onClick={toggleFont}>Toggle Font</button>
       <p>font: {font}</p>
+      <p>Sans Serif</p>
+      <p>Mono</p>
+      <p>Serif</p>
     </div>
   )
 }
