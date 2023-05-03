@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-right hr {
+    border-bottom: 1px solid #E9E9E9;
+    height: 32px;
+    margin: 0;
+}
+
+.header-right .font-selector {
+    margin-right: 26px;
+}
+
+.header-right .dark-mode-toggle {
+    margin-left: 26px;
+}
