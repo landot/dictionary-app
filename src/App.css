@@ -1,1 +1,46 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/inter/Inter-VariableFont_slnt,wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/inconsolata/Inconsolata-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/lora/Lora-VariableFont_wght.ttf") format("truetype");
+}
+
 #root {}
+
+.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.light {
+  background-color: #fff;
+  color: #333;
+}
+
+.Inconsolata {
+  font-family: Inconsolata;
+}
+
+.Inter {
+  font-family: Inter;
+}
+
+.Lora {
+  font-family: Lora;
+}
+
+input, textarea, button {font-family: inherit}
