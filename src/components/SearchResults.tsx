@@ -20,7 +20,7 @@ export function SearchResults(props: {theme: string, searchResults: DictionaryAp
             <div className='results-header'>
                 <div className='header-left'>
                     <h1>{resultData.word}</h1>
-                    {/* <p>{resultData.phonetic}</p> */}
+                    <p>{resultData.phonetic}</p>
                 </div>
                 <PlayButton />
             </div>

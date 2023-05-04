@@ -95,7 +95,8 @@ ul {
     content: "•";
     color: #8F19E8;
     display: inline-block;
-    width: 1em;
+    margin-right: 18px;
+    font-size: 30px;
 }
 
 .part-of-speech .other-words {
