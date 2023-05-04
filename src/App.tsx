@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getDictionaryResults } from './api';
 import './App.css'
 import { DictionaryApiResponse } from './assets/ApiResponse';
 import { Font } from './assets/fonts';
@@ -24,7 +25,8 @@ function App() {
     const [font, setFont] = useState<string>(localStorage.getItem('font') || Font.Inter);
     const [search, setSearch] = useState<string>('');
     const [searchResults, setSearchResults] = useState<DictionaryApiResponse[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
 
     const toggleTheme = () => {
       if (theme === 'light') {
@@ -56,25 +58,29 @@ function App() {
     }, [theme, font]);
 
     useEffect(() => {
+      async function loadSearchResults() {
+        setLoading(true)
+        try {
+          const data = await getDictionaryResults(search);
+          setSearchResults(data);
+        } catch (err: any) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      }
       if(search) {
-        setLoading(true);
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${search}`)
-          .then((r) => r.json())
-          .then((json) => setSearchResults(json));
-        setLoading(false);
+        loadSearchResults();
       }
     }, [search]);
 
   return (
     <div className={`App ${theme}`}>
       <div className='content'>
-        <p>search: {search}</p>
-        <p>loading: {loading.toString()}</p>
-        <p>{searchResults.length}</p>
         <Header theme={theme} toggleTheme={toggleTheme} toggleFont={toggleFont}/>
         <SearchField theme={theme} handleSearch={handleSearch}/>
-        {
-          (search && searchResults.length > 0) && <SearchResults theme={theme} searchResults={searchResults}/>
+        {!loading && 
+          <SearchResults theme={theme} searchResults={searchResults} errorMessage={error}/>
         }
       </div>
     </div>

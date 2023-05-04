@@ -1,12 +1,19 @@
 import { Definition, DictionaryApiResponse, Meaning } from '../assets/ApiResponse';
 import { PlayButton } from './PlayButton';
 import newWindowIcon from '../assets/images/icon-new-window.svg';
-import searchData from '../assets/sampleData.json';
 import './SearchResults.css';
 
-export function SearchResults(props: {theme: string, searchResults: DictionaryApiResponse[]}) {
-    // const resultData: DictionaryApiResponse = searchData[0];
-    // console.log(props.searchResults[0])
+export function SearchResults(props: {theme: string, searchResults: DictionaryApiResponse[], errorMessage: string}) {
+    // scenario when error occurs in API response
+    if(props.errorMessage !== '') {
+        return <p>{props.errorMessage}</p>
+    }
+
+    // scenario when page initially loads
+    if(props.searchResults.length === 0) {
+        return <></>
+    }
+
     const resultData = props.searchResults[0];
     return (
         <div className={`results ${props.theme}`}>
@@ -32,7 +39,7 @@ export function SearchResults(props: {theme: string, searchResults: DictionaryAp
                             {meaning.definitions.map((definition: Definition) => {
                                 return (
                                     <>
-                                        <li>{definition.definition}</li>
+                                        <li key={definition.definition}>{definition.definition}</li>
                                         {definition.example && <p>"{definition.example}"</p>}
                                     </>
                                 )
