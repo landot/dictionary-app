@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css'
+import { DictionaryApiResponse } from './assets/ApiResponse';
 import { Font } from './assets/fonts';
+import { Header } from './components/Header';
+import { SearchField } from './components/SearchField';
+import { SearchResults } from './components/SearchResults';
 
 
 // - Search for words using the input field
@@ -13,9 +17,14 @@ import { Font } from './assets/fonts';
 // - See hover and focus states for all interactive elements on the page
 // - **Bonus**: Have the correct color scheme chosen for them based on their computer preferences. _Hint_: Research `prefers-color-scheme` in CSS.
 
+// https://api.dictionaryapi.dev/api/v2/entries/en/hello
+
 function App() {
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-    const [font, setFont] = useState(localStorage.getItem('font') || Font.Inter);
+    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'light');
+    const [font, setFont] = useState<string>(localStorage.getItem('font') || Font.Inter);
+    const [search, setSearch] = useState<string>('');
+    const [searchResults, setSearchResults] = useState<DictionaryApiResponse[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const toggleTheme = () => {
       if (theme === 'light') {
@@ -35,22 +44,39 @@ function App() {
       }
     }
 
+    const handleSearch = (searchText: string) => {
+      setSearch(searchText);
+      setSearchResults([]);
+    }
+
     useEffect(() => {
       localStorage.setItem('theme', theme);
       localStorage.setItem('font', font);
       document.body.className = `${theme} ${font}`;
     }, [theme, font]);
 
+    useEffect(() => {
+      if(search) {
+        setLoading(true);
+        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${search}`)
+          .then((r) => r.json())
+          .then((json) => setSearchResults(json));
+        setLoading(false);
+      }
+    }, [search]);
+
   return (
     <div className={`App ${theme}`}>
-      <p>asdf</p>
-      <p>Whereas disregard and contempt for human rights have resulted</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
-      <button onClick={toggleFont}>Toggle Font</button>
-      <p>font: {font}</p>
-      <p>Sans Serif</p>
-      <p>Mono</p>
-      <p>Serif</p>
+      <div className='content'>
+        <p>search: {search}</p>
+        <p>loading: {loading.toString()}</p>
+        <p>{searchResults.length}</p>
+        <Header theme={theme} toggleTheme={toggleTheme} toggleFont={toggleFont}/>
+        <SearchField theme={theme} handleSearch={handleSearch}/>
+        {
+          (search && searchResults.length > 0) && <SearchResults theme={theme} searchResults={searchResults}/>
+        }
+      </div>
     </div>
   )
 }

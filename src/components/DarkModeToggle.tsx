@@ -1,26 +1,27 @@
 import moonIcon from '../assets/images/icon-moon.svg';
 import moonIconPurple from '../assets/images/icon-moon-purple.svg';
 import './DarkModeToggle.css';
-import { useState } from 'react';
 
-export function DarkModeToggle() {
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+export function DarkModeToggle(props: {theme: string, toggleTheme: any}) {
 
     function toggleTheme() {
-        if (theme === 'light') {
-          setTheme('dark');
+        if (props.theme === 'light') {
+          props.toggleTheme('dark');
         } else {
-          setTheme('light');
+          props.toggleTheme('light');
         }
     }
 
     return (
         <div className='dark-mode-toggle'>
             <label className="switch">
-                <input type="checkbox" />
+                <input 
+                    type="checkbox" 
+                    checked={props.theme === 'dark'}
+                />
                 <span className="slider round" onClick={toggleTheme}></span>
             </label>
-            <img src={theme === 'dark' ? moonIconPurple : moonIcon} alt="dark mode icon" />
+            <img src={props.theme === 'dark' ? moonIconPurple : moonIcon} alt="dark mode icon" />
         </div>
     )
 }

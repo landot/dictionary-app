@@ -2,11 +2,9 @@ import { useState } from 'react';
 import searchIcon from '../assets/images/icon-search.svg';
 import './SearchField.css';
 
-export function SearchField() {
+export function SearchField(props: {theme: string, handleSearch: any}) {
     const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState('');
-
-    const theme = localStorage.getItem('theme');
 
     function handleTextUpdate(e: React.ChangeEvent<HTMLInputElement>) {
         setInputValue(e.target.value);
@@ -17,7 +15,7 @@ export function SearchField() {
             setError('Whoops, can’t be empty…');
         } else {
             setError('');
-            // add another call here to send the input value to the app
+            props.handleSearch(inputValue);
         }
     }
 
@@ -28,7 +26,7 @@ export function SearchField() {
     }
 
     return (
-        <div className={`search-field ${theme}`}>
+        <div className={`search-field ${props.theme}`}>
             <div className={`search-bar${error ? ' error': ''}`}>
                 <input 
                     type="text" 

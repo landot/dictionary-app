@@ -1,3 +1,6 @@
+.results {
+    width: 100%;
+}
 
 /* header section */
 .results-header {
@@ -109,27 +112,28 @@ ul {
 
 
 /* source */
-.source {
+.source-section {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-.source p {
+.source-section p {
     text-decoration: underline;
     color: #757575;
     margin-right: 21px;
 }
 
-.source a {
+.source-section a {
     margin-left: 10px;
     color: #2D2D2D;
 }
 
-.source img {
+.source-section img {
     width: 12px;
     height: 12px;
 }
 
-.results.dark .source a {
+.results.dark .source-section a {
     color: #FFFFFF;
 }

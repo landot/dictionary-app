@@ -4,16 +4,16 @@ import newWindowIcon from '../assets/images/icon-new-window.svg';
 import searchData from '../assets/sampleData.json';
 import './SearchResults.css';
 
-export function SearchResults() {
-    const theme = localStorage.getItem('theme');
-    const resultData: DictionaryApiResponse = searchData[0];
-
+export function SearchResults(props: {theme: string, searchResults: DictionaryApiResponse[]}) {
+    // const resultData: DictionaryApiResponse = searchData[0];
+    // console.log(props.searchResults[0])
+    const resultData = props.searchResults[0];
     return (
-        <div className={`results ${theme}`}>
+        <div className={`results ${props.theme}`}>
             <div className='results-header'>
                 <div className='header-left'>
                     <h1>{resultData.word}</h1>
-                    <p>{resultData.phonetic}</p>
+                    {/* <p>{resultData.phonetic}</p> */}
                 </div>
                 <PlayButton />
             </div>
@@ -58,15 +58,15 @@ export function SearchResults() {
                 )
             })}
             <hr />  
-            <div className='source'>
+            <div className='source-section'>
                 <p>Source</p>
                 {resultData.sourceUrls.map(url => 
-                    <>
+                    <div className='source'>
                         <a href={url}>{url}</a>
                         <a href={url} target="_blank">
                             <img src={newWindowIcon} alt="open in new window" />
                         </a>
-                    </>
+                    </div>
                 )}
             </div>
         </div>

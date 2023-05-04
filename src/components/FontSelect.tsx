@@ -2,17 +2,16 @@ import { useState } from "react";
 import arrowDown from '../assets/images/icon-arrow-down.svg';
 import './FontSelect.css';
 
-export function FontSelect() {
+export function FontSelect(props: {toggleFont: any, theme: string}) {
     const [showDropdown, setShowDropdown] = useState(false);
     const [fontFamily, setFontFamily] = useState('Sans Serif');
     const [fontType, setFontType] = useState('Inter');
-
-    const theme = localStorage.getItem('theme');
 
     function handleDropdownItemClick(fontFamily: string, fontType: string) {
         setFontFamily(fontFamily);
         setFontType(fontType);
         setShowDropdown(false);
+        props.toggleFont(fontType);
     }
 
     function handleDropdownClick() {
@@ -20,7 +19,7 @@ export function FontSelect() {
     }
 
     return (
-        <div className={`font-selector ${theme}`}>
+        <div className={`font-selector ${props.theme}`}>
             <div className='current-font' onClick={handleDropdownClick}>
                 <button style={{
                     fontFamily: fontFamily
