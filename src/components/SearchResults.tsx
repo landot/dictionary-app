@@ -5,6 +5,8 @@ import './SearchResults.css';
 import { NotFound } from './NotFound';
 
 export function SearchResults(props: {theme: string, searchResults: DictionaryApiResponse[], errorMessage: string}) {
+    let audio: HTMLAudioElement | undefined;
+    
     // scenario when error occurs in API response
     if(props.errorMessage !== '') {
         return <NotFound theme={props.theme} errorMessage={props.errorMessage}/>
@@ -16,6 +18,13 @@ export function SearchResults(props: {theme: string, searchResults: DictionaryAp
     }
 
     const resultData = props.searchResults[0];
+    const phoneticAudio = resultData.phonetics.filter(phonetic => phonetic.audio !== '' && phonetic.text === resultData.phonetic);
+    phoneticAudio.length > 0 ? audio = new Audio(phoneticAudio[0].audio) : audio = undefined;
+
+    function handleAudio() {
+      audio && audio.play()
+    }
+
     return (
         <div className={`results ${props.theme}`}>
             <div className='results-header'>
@@ -23,7 +32,7 @@ export function SearchResults(props: {theme: string, searchResults: DictionaryAp
                     <h1>{resultData.word}</h1>
                     <p>{resultData.phonetic}</p>
                 </div>
-                <PlayButton />
+                {audio && <PlayButton onClick={handleAudio}/>}
             </div>
             {resultData.meanings.map((meaning: Meaning) => {
                 const synonyms = meaning.definitions.filter((definition: Definition) => definition.synonyms.length > 0).map((definition: Definition) => definition.synonyms).flat().join(", ");
