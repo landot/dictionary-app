@@ -1,0 +1,100 @@
+
+/* header section */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.results-header .header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.results-header h1 {
+    font-weight: 700;
+    font-size: 64px;
+    color: #2D2D2D;
+    margin: 0;
+}
+
+.results-header p {
+    font-weight: 400;
+    font-size: 24px;
+    color: #A445ED;
+    margin: 0;
+}
+
+/* part of speech section */
+.part-of-speech .divider {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+} 
+
+.part-of-speech .divider hr {
+    border-bottom: 1px solid #E9E9E9;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    margin-left: 23px;
+}
+
+.part-of-speech .type {
+    font-weight: 400;
+    font-size: 24px;
+    color: #2D2D2D;
+}
+
+.part-of-speech .sub-section {
+    font-weight: 400;
+    font-size: 20px;
+    color: #757575;
+}
+
+ul {
+    list-style: none;
+}
+
+.part-of-speech li {
+    margin-left: 20px;
+    margin-bottom: 13px;
+    text-indent:-20px;
+    color: #2D2D2D;
+}
+
+.part-of-speech li::before {
+    content: "•";
+    color: #8F19E8;
+    display: inline-block;
+    width: 1em;
+}
+
+.part-of-speech .other-words {
+    display: flex;
+    align-items: center;
+}
+
+.part-of-speech .other-words p {
+    margin-left: 24px;
+    font-weight: 700;
+    font-size: 20px;
+    color: #A445ED;
+}
+
+
+/* source */
+.source {
+    display: flex;
+    align-items: center;
+}
+
+.source p {
+    text-decoration: underline;
+    color: #757575;
+}
+
+.source a {
+    margin-left: 21px;
+    color: #2D2D2D;
+}

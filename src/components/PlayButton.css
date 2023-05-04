@@ -1,5 +1,4 @@
-/* .play-icon {
-    background-color: white;
-    fill: white;
-    mix-blend-mode: normal;
-} */
+.play-icon {
+    width: 75px;
+    height: 75px;
+}
