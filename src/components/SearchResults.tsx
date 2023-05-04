@@ -61,9 +61,6 @@ export function SearchResults() {
                 {audio && <PlayButton onClick={handleAudio}/>}
             </div>
             {resultData.meanings.map((meaning: Meaning) => {
-                const synonyms = meaning.definitions.filter((definition: Definition) => definition.synonyms.length > 0).map((definition: Definition) => definition.synonyms).flat().join(", ");
-                const antonyms = meaning.definitions.filter((definition: Definition) => definition.antonyms.length > 0).map((definition: Definition) => definition.antonyms).flat().join(", ");
-
                 return (
                     <div className='part-of-speech'>
                         <div className='divider'>
@@ -81,19 +78,19 @@ export function SearchResults() {
                                 )
                             })}
                         </ul>
-                        {synonyms && (
+                        {meaning.synonyms.length > 0 && (
                             <div className='other-words'>
                                 <h2 className='sub-section'>Synonyms</h2>
                                 <p>
-                                    {synonyms}
+                                    {meaning.synonyms.join(", ")}
                                 </p>
                             </div>
                         )}
-                        {antonyms && (
+                        {meaning.antonyms.length > 0 && (
                             <div className='other-words'>
                                 <h2 className='sub-section'>Antonyms</h2>
                                 <p>
-                                    {antonyms}
+                                    {meaning.antonyms.join(", ")}
                                 </p>
                             </div>
                         )}

@@ -1,5 +1,6 @@
 .results {
     width: 100%;
+    margin-top: 40px;
 }
 
 /* header section */
@@ -7,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .results-header .header-left {
@@ -78,13 +80,12 @@ ul {
     margin-bottom: 13px;
     text-indent:-20px;
     color: #2D2D2D;
+    font-weight: 400;
+    font-size: 18px;
 }
 
 .part-of-speech ul p {
     margin-left: 20px;
-    color: #757575;
-    font-weight: 400;
-    font-size: 18px;
 }
 
 .results.dark .part-of-speech li {
@@ -123,11 +124,15 @@ ul {
     text-decoration: underline;
     color: #757575;
     margin-right: 21px;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .source-section a {
     margin-left: 10px;
     color: #2D2D2D;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .source-section img {
@@ -138,3 +143,41 @@ ul {
 .results.dark .source-section a {
     color: #FFFFFF;
 }
+
+
+
+@media (max-width: 600px) {
+    /* header section */
+    .results-header h1 {
+        font-size: 32px;
+    }
+
+    .results-header p {
+        font-size: 18px;
+    }
+
+    .results-header img {
+        width: 48px;
+        height: 48px;
+    }
+
+    /* part of speech section */
+    .part-of-speech .type {
+        font-size: 18px;
+    }
+
+    .part-of-speech .sub-section {
+        font-size: 18px;
+    }
+   
+    .part-of-speech ul li {
+        font-size: 15px;
+    }
+
+    .part-of-speech .other-words p {
+        font-size: 16px;
+    }
+
+    /* source */
+
+  }

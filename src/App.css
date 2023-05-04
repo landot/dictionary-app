@@ -44,17 +44,27 @@
 input, textarea, button {font-family: inherit}
 
 #root {
-  margin: 60px 40px;
+  margin: 60px 40px 120px 40px;
   display: flex;
   justify-content: center;
 }
 
 .site-wrapper {
-  width: 80%;
+  width: 100%;
   max-width: 1000px;
   min-width: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+main {
+  width: 100%;
+}
+
+@media (max-width: 500px) {
+  #root {
+    margin: 24px 24px 80px 24px;
+  }
 }
