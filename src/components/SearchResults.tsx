@@ -1,4 +1,4 @@
-import { Definition, DictionaryApiResponse, Meaning } from '../assets/ApiResponse';
+import { Definition, DictionaryApiResponse, Meaning } from '../assets/apiResponse';
 import { PlayButton } from './PlayButton';
 import newWindowIcon from '../assets/images/icon-new-window.svg';
 import './SearchResults.css';
