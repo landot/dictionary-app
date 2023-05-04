@@ -8,7 +8,7 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {},
   parameters: {
-    backgrounds: { default: 'light' },
+    backgrounds: { default: 'dark' },
   },
 } satisfies Meta<typeof SearchResults>;
 

@@ -1,13 +1,15 @@
 import { Definition, DictionaryApiResponse, Meaning } from '../assets/ApiResponse';
 import { PlayButton } from './PlayButton';
+import newWindowIcon from '../assets/images/icon-new-window.svg';
 import searchData from '../assets/sampleData.json';
 import './SearchResults.css';
 
 export function SearchResults() {
+    const theme = localStorage.getItem('theme');
     const resultData: DictionaryApiResponse = searchData[0];
 
     return (
-        <div>
+        <div className={`results ${theme}`}>
             <div className='results-header'>
                 <div className='header-left'>
                     <h1>{resultData.word}</h1>
@@ -28,7 +30,12 @@ export function SearchResults() {
                             <h2 className='sub-section'>Meaning</h2>
                         <ul>
                             {meaning.definitions.map((definition: Definition) => {
-                                return <li>{definition.definition}</li>
+                                return (
+                                    <>
+                                        <li>{definition.definition}</li>
+                                        {definition.example && <p>"{definition.example}"</p>}
+                                    </>
+                                )
                             })}
                         </ul>
                         {synonyms && (
@@ -53,7 +60,14 @@ export function SearchResults() {
             <hr />  
             <div className='source'>
                 <p>Source</p>
-                {resultData.sourceUrls.map(url => <a href={url}>{url}</a>)}
+                {resultData.sourceUrls.map(url => 
+                    <>
+                        <a href={url}>{url}</a>
+                        <a href={url} target="_blank">
+                            <img src={newWindowIcon} alt="open in new window" />
+                        </a>
+                    </>
+                )}
             </div>
         </div>
     )
