@@ -1,11 +1,14 @@
 import { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import searchIcon from '../assets/images/icon-search.svg';
 import { ThemeContext } from '../context/ThemeContext';
 import './SearchField.css';
 
-export function SearchField(props: {handleSearch: any}) {
+export function SearchField() {
     const theme = useContext(ThemeContext);
-    const [inputValue, setInputValue] = useState('');
+    const navigate = useNavigate();
+    const { word } = useParams()
+    const [inputValue, setInputValue] = useState(word || '');
     const [error, setError] = useState('');
 
     function handleTextUpdate(e: React.ChangeEvent<HTMLInputElement>) {
@@ -17,7 +20,7 @@ export function SearchField(props: {handleSearch: any}) {
             setError('Whoops, can’t be empty…');
         } else {
             setError('');
-            props.handleSearch(inputValue);
+            navigate(inputValue);
         }
     }
 

@@ -3,29 +3,52 @@ import { PlayButton } from './PlayButton';
 import newWindowIcon from '../assets/images/icon-new-window.svg';
 import './SearchResults.css';
 import { NotFound } from './NotFound';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
+import { getDictionaryResults } from '../api';
+import { useParams } from 'react-router-dom';
 
-export function SearchResults(props: {searchResults: DictionaryApiResponse[], errorMessage: string}) {
+export function SearchResults() {
+    const { word } = useParams()
+    const [searchResults, setSearchResults] = useState<DictionaryApiResponse[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
     const theme = useContext(ThemeContext);
     let audio: HTMLAudioElement | undefined;
-    
-    // scenario when error occurs in API response
-    if(props.errorMessage !== '') {
-        return <NotFound errorMessage={props.errorMessage}/>
-    }
-
-    // scenario when page initially loads
-    if(props.searchResults.length === 0) {
-        return <></>
-    }
-
-    const resultData = props.searchResults[0];
-    const phoneticAudio = resultData.phonetics.filter(phonetic => phonetic.audio !== '' && phonetic.text === resultData.phonetic);
-    phoneticAudio.length > 0 ? audio = new Audio(phoneticAudio[0].audio) : audio = undefined;
+    let resultData: DictionaryApiResponse;
+    let phoneticAudio;
 
     function handleAudio() {
-      audio && audio.play()
+        audio && audio.play()
+    }
+
+    useEffect(() => {
+        async function loadSearchResults() {
+          setLoading(true);
+          setError('');
+  
+          try {
+            const data = await getDictionaryResults(word as string);
+            setSearchResults(data);
+          } catch (err: any) {
+            setError(err.message);
+          } finally {
+            setLoading(false);
+          }
+        }
+        loadSearchResults();
+    }, [word]);
+
+    if(error !== '') {
+        return <NotFound errorMessage={error}/>
+    }
+
+    if(loading || searchResults.length === 0) {
+        return <></>
+    } else {
+        resultData = searchResults[0];
+        phoneticAudio = resultData.phonetics.filter(phonetic => phonetic.audio !== '' && phonetic.text === resultData.phonetic);
+        phoneticAudio.length > 0 ? audio = new Audio(phoneticAudio[0].audio) : audio = undefined;
     }
 
     return (
