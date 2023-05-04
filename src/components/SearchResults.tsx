@@ -30,14 +30,15 @@ export function SearchResults() {
           try {
             const data = await getDictionaryResults(word as string);
             setSearchResults(data);
-          } catch (err: any) {
-            setError(err.message);
+          } catch (err: unknown) {
+            setError(`${(err as Error).message}`);
           } finally {
             setLoading(false);
           }
         }
         loadSearchResults();
     }, [word]);
+
 
     if(error !== '') {
         return <NotFound errorMessage={error}/>

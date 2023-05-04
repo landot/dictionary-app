@@ -4,7 +4,7 @@ import './DarkModeToggle.css';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 
-export function DarkModeToggle(props: {toggleTheme: any}) {
+export function DarkModeToggle(props: {toggleTheme: (theme: string) => void}) {
     const theme = useContext(ThemeContext);
 
     function toggleTheme() {

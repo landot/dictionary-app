@@ -3,7 +3,7 @@ import arrowDown from '../assets/images/icon-arrow-down.svg';
 import { ThemeContext } from "../context/ThemeContext";
 import './FontSelect.css';
 
-export function FontSelect(props: {toggleFont: any}) {
+export function FontSelect(props: {toggleFont: (fontType: string) => void}) {
     const theme = useContext(ThemeContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const [fontFamily, setFontFamily] = useState('Sans Serif');

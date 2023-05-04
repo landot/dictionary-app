@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Font } from "../assets/fonts";
-import { ThemeContext } from "../context/ThemeContext";
+import { ThemeContext, ThemeContextType } from "../context/ThemeContext";
 import { Header } from "./Header";
 import { SearchField } from "./SearchField";
 
 
-export function Layout(props: {setTheme: any}) {
+export function Layout(props: {setTheme: React.Dispatch<React.SetStateAction<ThemeContextType>>}) {
     const [font, setFont] = useState<string>(localStorage.getItem('font') || Font.Inter);
 
     const theme = useContext(ThemeContext);

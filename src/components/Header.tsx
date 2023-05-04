@@ -4,7 +4,10 @@ import logo from '../assets/images/logo.svg';
 import './Header.css';
 import { useNavigate } from "react-router-dom";
 
-export function Header(props: {toggleTheme: any, toggleFont: any}) {
+export function Header(props: {
+    toggleTheme: () => void, 
+    toggleFont: (fontType: string) => void
+}) {
     const navigate = useNavigate();
 
     function handleHomeNavigation() {

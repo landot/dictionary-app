@@ -25,3 +25,7 @@
 .header-right .dark-mode-toggle {
     margin-left: 26px;
 }
+
+.header > img {
+    cursor: pointer;
+}

@@ -3,7 +3,7 @@ import PlayIconHover from '../assets/images/icon-play-hover.svg';
 import './PlayButton.css';
 import { useState } from 'react';
 
-export function PlayButton(props: {onClick: any}) {
+export function PlayButton(props: {onClick: React.MouseEventHandler<HTMLImageElement>}) {
     const [isHover, setIsHover] = useState(false);
 
     return (
