@@ -60,21 +60,21 @@ export function SearchResults() {
                 </div>
                 {audio && <PlayButton onClick={handleAudio}/>}
             </div>
-            {resultData.meanings.map((meaning: Meaning) => {
+            {resultData.meanings.map((meaning: Meaning, meaningIndex) => {
                 return (
-                    <div className='part-of-speech'>
+                    <div key={`${meaning.partOfSpeech}-${meaningIndex}`} className='part-of-speech'>
                         <div className='divider'>
                             <h1 className='type'>{meaning.partOfSpeech}</h1>
                             <hr />  
                         </div>
                             <h2 className='sub-section'>Meaning</h2>
                         <ul>
-                            {meaning.definitions.map((definition: Definition) => {
+                            {meaning.definitions.map((definition: Definition, definitionIndex) => {
                                 return (
-                                    <>
-                                        <li key={definition.definition}>{definition.definition}</li>
+                                    <div key={`${meaning.partOfSpeech}-${meaningIndex}-${definitionIndex}`}>
+                                        <li>{definition.definition}</li>
                                         {definition.example && <p>"{definition.example}"</p>}
-                                    </>
+                                    </div>
                                 )
                             })}
                         </ul>
@@ -101,7 +101,7 @@ export function SearchResults() {
             <div className='source-section'>
                 <p>Source</p>
                 {resultData.sourceUrls.map(url => 
-                    <div className='source'>
+                    <div className='source' key={url}>
                         <a href={url}>{url}</a>
                         <a href={url} target="_blank">
                             <img src={newWindowIcon} alt="open in new window" />

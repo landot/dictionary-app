@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import searchIcon from '../assets/images/icon-search.svg';
 import { ThemeContext } from '../context/ThemeContext';
@@ -29,6 +29,11 @@ export function SearchField() {
             handleSearch();
           }
     }
+
+    // fixes bug where navigating back to the home scren ("/" route) doesn't update inputValue to be ''
+    useEffect(() => {
+        setInputValue(word || '');
+      }, [word]);
 
     return (
         <div className={`search-field ${theme}`}>

@@ -21,6 +21,7 @@ export function DarkModeToggle(props: {toggleTheme: any}) {
                 <input 
                     type="checkbox" 
                     checked={theme === 'dark'}
+                    onChange={() => null}
                 />
                 <span className="slider round" onClick={toggleTheme}></span>
             </label>

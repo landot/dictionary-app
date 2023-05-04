@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import arrowDown from '../assets/images/icon-arrow-down.svg';
+import { ThemeContext } from "../context/ThemeContext";
 import './FontSelect.css';
 
-export function FontSelect(props: {toggleFont: any, theme: string}) {
+export function FontSelect(props: {toggleFont: any}) {
+    const theme = useContext(ThemeContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const [fontFamily, setFontFamily] = useState('Sans Serif');
     const [fontType, setFontType] = useState('Inter');
@@ -19,7 +21,7 @@ export function FontSelect(props: {toggleFont: any, theme: string}) {
     }
 
     return (
-        <div className={`font-selector ${props.theme}`}>
+        <div className={`font-selector ${theme}`}>
             <div className='current-font' onClick={handleDropdownClick}>
                 <button style={{
                     fontFamily: fontFamily
