@@ -8,14 +8,17 @@ import { SearchField } from './components/SearchField';
 import { SearchResults } from './components/SearchResults';
 
 
-// - Search for words using the input field
-// - See the Free Dictionary API's response for the searched word
-// - See a form validation message when trying to submit a blank form
 // - Play the audio file for a word when it's available
-// - Switch between serif, sans serif, and monospace fonts
-// - Switch between light and dark themes
-// - View the optimal layout for the interface depending on their device's screen size
 // - See hover and focus states for all interactive elements on the page
+// add url search parameters
+// add hyperlinks to synonyms and antonyms using url search parameters
+// clean up desktop styling
+// clean up mobile styling
+// - View the optimal layout for the interface depending on their device's screen size
+// fix up storybook
+// add unit tests
+// fix up bad types
+// add theme handler
 // - **Bonus**: Have the correct color scheme chosen for them based on their computer preferences. _Hint_: Research `prefers-color-scheme` in CSS.
 
 // https://api.dictionaryapi.dev/api/v2/entries/en/hello
@@ -59,7 +62,9 @@ function App() {
 
     useEffect(() => {
       async function loadSearchResults() {
-        setLoading(true)
+        setLoading(true);
+        setError('');
+
         try {
           const data = await getDictionaryResults(search);
           setSearchResults(data);

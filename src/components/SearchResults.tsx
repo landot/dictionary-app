@@ -2,11 +2,12 @@ import { Definition, DictionaryApiResponse, Meaning } from '../assets/ApiRespons
 import { PlayButton } from './PlayButton';
 import newWindowIcon from '../assets/images/icon-new-window.svg';
 import './SearchResults.css';
+import { NotFound } from './NotFound';
 
 export function SearchResults(props: {theme: string, searchResults: DictionaryApiResponse[], errorMessage: string}) {
     // scenario when error occurs in API response
     if(props.errorMessage !== '') {
-        return <p>{props.errorMessage}</p>
+        return <NotFound theme={props.theme} errorMessage={props.errorMessage}/>
     }
 
     // scenario when page initially loads
