@@ -3,13 +3,16 @@ import { PlayButton } from './PlayButton';
 import newWindowIcon from '../assets/images/icon-new-window.svg';
 import './SearchResults.css';
 import { NotFound } from './NotFound';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
-export function SearchResults(props: {theme: string, searchResults: DictionaryApiResponse[], errorMessage: string}) {
+export function SearchResults(props: {searchResults: DictionaryApiResponse[], errorMessage: string}) {
+    const theme = useContext(ThemeContext);
     let audio: HTMLAudioElement | undefined;
     
     // scenario when error occurs in API response
     if(props.errorMessage !== '') {
-        return <NotFound theme={props.theme} errorMessage={props.errorMessage}/>
+        return <NotFound errorMessage={props.errorMessage}/>
     }
 
     // scenario when page initially loads
@@ -26,7 +29,7 @@ export function SearchResults(props: {theme: string, searchResults: DictionaryAp
     }
 
     return (
-        <div className={`results ${props.theme}`}>
+        <div className={`results ${theme}`}>
             <div className='results-header'>
                 <div className='header-left'>
                     <h1>{resultData.word}</h1>

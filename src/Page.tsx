@@ -6,10 +6,11 @@ import { Font } from "./assets/fonts";
 import { Header } from "./components/Header";
 import { SearchField } from "./components/SearchField";
 import { SearchResults } from "./components/SearchResults";
+import { ThemeContext, ThemeContextType } from "./context/ThemeContext";
 
 export function Page() {
+    const [theme, setTheme] = useState<ThemeContextType>(localStorage.getItem('theme') as ThemeContextType  || 'light');
     const [searchParams, setSearchParams] = useSearchParams();
-    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'light');
     const [font, setFont] = useState<string>(localStorage.getItem('font') || Font.Inter);
     const [search, setSearch] = useState<string>(searchParams.get('word') || '');
     const [searchResults, setSearchResults] = useState<DictionaryApiResponse[]>([]);
@@ -72,14 +73,16 @@ export function Page() {
     }, [search]);
     
     return (      
-        <div className={`App ${theme}`}>
-        <div className='content'>
-          <Header theme={theme} toggleTheme={toggleTheme} toggleFont={toggleFont}/>
-          <SearchField theme={theme} handleSearch={handleSearch}/>
-          {!loading && 
-            <SearchResults theme={theme} searchResults={searchResults} errorMessage={error}/>
-          }
-        </div>
-      </div>
+        <ThemeContext.Provider value={theme}>
+            <div className={`App ${theme}`}>
+                <div className='content'>
+                    <Header toggleTheme={toggleTheme} toggleFont={toggleFont}/>
+                    <SearchField handleSearch={handleSearch}/>
+                    {!loading && 
+                        <SearchResults searchResults={searchResults} errorMessage={error}/>
+                    }
+                </div>
+            </div>
+        </ThemeContext.Provider>
     )
 }

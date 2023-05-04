@@ -11,7 +11,6 @@ import './App.css'
 // fix up storybook
 // add unit tests
 // fix up bad types
-// add theme handler
 // - **Bonus**: Have the correct color scheme chosen for them based on their computer preferences. _Hint_: Research `prefers-color-scheme` in CSS.
 
 // https://api.dictionaryapi.dev/api/v2/entries/en/hello

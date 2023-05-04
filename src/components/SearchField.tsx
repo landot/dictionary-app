@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import searchIcon from '../assets/images/icon-search.svg';
+import { ThemeContext } from '../context/ThemeContext';
 import './SearchField.css';
 
-export function SearchField(props: {theme: string, handleSearch: any}) {
+export function SearchField(props: {handleSearch: any}) {
+    const theme = useContext(ThemeContext);
     const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState('');
 
@@ -26,7 +28,7 @@ export function SearchField(props: {theme: string, handleSearch: any}) {
     }
 
     return (
-        <div className={`search-field ${props.theme}`}>
+        <div className={`search-field ${theme}`}>
             <div className={`search-bar${error ? ' error': ''}`}>
                 <input 
                     type="text" 
